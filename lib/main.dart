@@ -16,22 +16,30 @@ class MoodModel with ChangeNotifier {
   String get currentMood => _currentMood;
   Color _backgroundColor = Colors.yellow;
   Color get backgroundColor => _backgroundColor;
+  Map<String, int> moodCounts = {
+    'happy': 0,
+    'sad': 0,
+    'excited': 0,
+  };
 
   void setHappy() {
     _currentMood = 'happy';
     _backgroundColor = const Color.fromARGB(255, 250, 236, 110);
     notifyListeners();
+    moodCounts['happy'] = (moodCounts['happy'] ?? 0) + 1;
   }
 
   void setSad() {
     _currentMood = 'sad';
     _backgroundColor = const Color.fromARGB(255, 68, 26, 175);
+    moodCounts['sad'] = (moodCounts['sad'] ?? 0) + 1;
     notifyListeners();
   }
 
   void setExcited() {
     _currentMood = 'excited';
     _backgroundColor = const Color.fromARGB(255, 255, 91, 91);
+    moodCounts['excited'] = (moodCounts['excited'] ?? 0) + 1;
     notifyListeners();
   }
 }
@@ -64,6 +72,8 @@ class HomePage extends StatelessWidget {
             MoodDisplay(),
             SizedBox(height: 50),
             MoodButtons(),
+            SizedBox(height: 10),
+            MoodCounts(),
           ],
         ),
       ),
@@ -147,6 +157,25 @@ class MoodButtons extends StatelessWidget {
             ),
         ),
       ],
+    );
+  }
+}
+class MoodCounts extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<MoodModel>(
+      builder: (context, moodModel, child) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Happy: ${moodModel.moodCounts['happy']}', style: TextStyle(fontSize: 20)),
+            SizedBox(width: 50),
+            Text('Sad: ${moodModel.moodCounts['sad']}', style: TextStyle(fontSize: 20)),
+            SizedBox(width: 50),
+            Text('Excited: ${moodModel.moodCounts['excited']}', style: TextStyle(fontSize: 20)),
+          ],
+        );
+      },
     );
   }
 }
