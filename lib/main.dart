@@ -93,19 +93,52 @@ class MoodButtons extends StatelessWidget {
           onPressed: () {
             Provider.of<MoodModel>(context, listen: false).setHappy();
           },
-          child: Text('Happy 😊'),
+          child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/happy.jpg',
+                  width: 24,
+                  height: 24,
+                ),
+                SizedBox(width: 8),
+                Text('Happy'),
+              ],
+            ),
         ),
         ElevatedButton(
           onPressed: () {
             Provider.of<MoodModel>(context, listen: false).setSad();
           },
-          child: Text('Sad 😢'),
+          child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/sad.jpg',
+                  width: 24,
+                  height: 24,
+                ),
+                SizedBox(width: 8),
+                Text('Sad'),
+              ],
+            ),
         ),
         ElevatedButton(
           onPressed: () {
             Provider.of<MoodModel>(context, listen: false).setExcited();
           },
-          child: Text('Excited 🎉'),
+          child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/excited.jpg',
+                  width: 24,
+                  height: 24,
+                ),
+                SizedBox(width: 8),
+                Text('Excited'),
+              ],
+            ),
         ),
       ],
     );
