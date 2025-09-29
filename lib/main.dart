@@ -14,19 +14,24 @@ void main() {
 class MoodModel with ChangeNotifier {
   String _currentMood = 'happy';
   String get currentMood => _currentMood;
+  Color _backgroundColor = Colors.yellow;
+  Color get backgroundColor => _backgroundColor;
 
   void setHappy() {
     _currentMood = 'happy';
+    _backgroundColor = const Color.fromARGB(255, 250, 236, 110);
     notifyListeners();
   }
 
   void setSad() {
     _currentMood = 'sad';
+    _backgroundColor = const Color.fromARGB(255, 68, 26, 175);
     notifyListeners();
   }
 
   void setExcited() {
     _currentMood = 'excited';
+    _backgroundColor = const Color.fromARGB(255, 255, 91, 91);
     notifyListeners();
   }
 }
@@ -48,6 +53,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.watch<MoodModel>().backgroundColor,
       appBar: AppBar(title: Text('Mood Toggle Challenge')),
       body: Center(
         child: Column(
@@ -72,7 +78,7 @@ class MoodDisplay extends StatelessWidget {
     return Consumer<MoodModel>(
       builder: (context, moodModel, child) {
         return Image.asset(
-          'assets/'+moodModel.currentMood+'.jpg',
+          'assets/${moodModel.currentMood}.jpg',
           width: 400,
           height:400,
           fit: BoxFit.cover,
