@@ -71,9 +71,11 @@ class MoodDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<MoodModel>(
       builder: (context, moodModel, child) {
-        return Text(
-          moodModel.currentMood,
-          style: TextStyle(fontSize: 100),
+        return Image.asset(
+          'assets/'+moodModel.currentMood+'.jpg',
+          width: 400,
+          height:400,
+          fit: BoxFit.cover,
         );
       },
     );
