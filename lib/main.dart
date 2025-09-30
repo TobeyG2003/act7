@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -55,6 +56,17 @@ class MoodModel with ChangeNotifier {
         moodHistory.removeAt(0);
     }
     notifyListeners();
+  }
+
+  void setRandomMood() {
+    int random = Random().nextInt(3);
+    if (random == 0) {
+      setHappy();
+    } else if (random == 1) {
+      setSad();
+    } else {
+      setExcited();
+    }
   }
 }
 
@@ -169,6 +181,28 @@ class MoodButtons extends StatelessWidget {
                 ),
                 SizedBox(width: 8),
                 Text('Excited'),
+              ],
+            ),
+        ),
+        ElevatedButton(
+          onPressed: () {
+            Provider.of<MoodModel>(context, listen: false).setRandomMood();
+          },
+          style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.deepPurple, // Background color of the button
+          foregroundColor: const Color.fromARGB(255, 174, 255, 0), // Text/icon color
+          shadowColor: const Color.fromARGB(255, 0, 255, 68),
+          ),
+          child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  'assets/surprised.jpg',
+                  width: 24,
+                  height: 24,
+                ),
+                SizedBox(width: 8),
+                Text('Surpise!'),
               ],
             ),
         ),
